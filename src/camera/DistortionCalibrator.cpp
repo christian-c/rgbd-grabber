@@ -54,7 +54,9 @@ void DistortionCalibrator::start() {
 
 void DistortionCalibrator::captureColor(cv::Mat& buffer) {
     _camera->captureColor(buffer);
-    cv::remap(buffer, buffer, _rectifyMaps[0], _rectifyMaps[1], CV_INTER_LINEAR);
+    cv::Mat buff;
+    cv::remap(buffer, buff, _rectifyMaps[0], _rectifyMaps[1], CV_INTER_LINEAR);
+    buff.copyTo(buffer);
 }
 
 void DistortionCalibrator::captureRawColor(cv::Mat& buffer) {
